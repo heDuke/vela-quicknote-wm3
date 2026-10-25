@@ -28,7 +28,7 @@ export function rem(exp, now) {
   const d = exp - now
   if (d <= 0) return '已到期'
   if (d < H1) return Math.max(1, Math.ceil(d / 60000)) + ' 分钟'
-  if (d < 24 * H1) return Math.floor(d / H1) + ' 小时'
-  return Math.floor(d / (24 * H1)) + ' 天'
+  if (d < 24 * H1) return Math.round(d / H1) + ' 小时'
+  return Math.max(1, Math.round(d / (24 * H1))) + ' 天'
 }
 export function newId(now) { return now.toString(36) + Math.floor(Math.random() * 1296).toString(36) }

@@ -23,12 +23,12 @@
 <!-- #component transforming-list-item {"style": "$item.st", "content": "<div class=\"btn btn-ic bt\" style=\"{{feedback[$item.id] || {opacity:1}}}\" ontouchstart=\"rDown($item.id)\" ontouchend=\"release($item.id)\" ontouchmove=\"rMove\" onclick=\"tapTpl($idx)\"><div class=\"icc {{$item.bg}}\"><image class=\"ic-sec\" src=\"{{$item.ic}}\"></image></div><div class=\"bcol\"><text class=\"t-labelM c-onS lab\">{{$item.t}}</text><text class=\"t-labelS c-onSV lab\">{{$item.s}}</text></div></div>"} -->
 </list-item>
 <list-item type="act" class="li-row" for="{{acts}}">
-<!-- #component transforming-list-item {"style": "$item.st", "content": "<div class=\"btn {{$item.cls}}\" style=\"{{feedback[$item.id] || {opacity:1}}}\" ontouchstart=\"rDown($item.id)\" ontouchend=\"release($item.id)\" ontouchmove=\"rMove\" onclick=\"tapAct($idx)\"><image class=\"ic24\" src=\"{{$item.ic}}\"></image><div class=\"bcol2\"><text class=\"t-labelM c-onS lab-w\">{{$item.t}}</text><text class=\"t-labelS c-onSV lab-w\">{{$item.s}}</text></div></div>"} -->
+<!-- #component transforming-list-item {"style": "$item.st", "content": "<div class=\"btn {{$item.cls}}\" style=\"{{feedback[$item.id] || {opacity:1}}}\" ontouchstart=\"rDown($item.id)\" ontouchend=\"release($item.id)\" ontouchmove=\"rMove\" onclick=\"tapAct($idx)\"><image class=\"ic24\" src=\"{{$item.ic}}\"></image><div class=\"bcol2\"><text class=\"t-labelM c-onS lab-w\">{{$item.t}}</text><text class=\"t-labelS c-onSV lab-w\" if=\"{{$item.s}}\">{{$item.s}}</text></div></div>"} -->
 </list-item>
 <list-item type="ab" class="li-row" for="{{abRows}}"><div class="tlc" style="{{$item.st}}"><div class="ab"><text class="ab-t">{{$item.t}}</text><text class="ab-s">{{$item.s}}</text></div></div></list-item>
 <list-item type="sub" class="li-sub" for="{{subRows}}"><div class="lsub"><text class="t-titleS c-onS">{{$item.t}}</text></div></list-item>
 <list-item type="act2" class="li-row" for="{{acts2}}">
-<!-- #component transforming-list-item {"style": "$item.st", "content": "<div class=\"btn {{$item.cls}}\" style=\"{{feedback[$item.id] || {opacity:1}}}\" ontouchstart=\"rDown($item.id)\" ontouchend=\"release($item.id)\" ontouchmove=\"rMove\" onclick=\"tapAct2($idx)\"><image class=\"ic24\" src=\"{{$item.ic}}\"></image><div class=\"bcol2\"><text class=\"t-labelM c-onS lab-w\">{{$item.t}}</text><text class=\"t-labelS c-onSV lab-w\">{{$item.s}}</text></div></div>"} -->
+<!-- #component transforming-list-item {"style": "$item.st", "content": "<div class=\"btn {{$item.cls}}\" style=\"{{feedback[$item.id] || {opacity:1}}}\" ontouchstart=\"rDown($item.id)\" ontouchend=\"release($item.id)\" ontouchmove=\"rMove\" onclick=\"tapAct2($idx)\"><image class=\"ic24\" src=\"{{$item.ic}}\"></image><div class=\"bcol2\"><text class=\"t-labelM c-onS lab-w\">{{$item.t}}</text><text class=\"t-labelS c-onSV lab-w\" if=\"{{$item.s}}\">{{$item.s}}</text></div></div>"} -->
 </list-item>
 <list-item type="phr" class="li-row" for="{{phRows}}">
 <!-- #component transforming-list-item {"style": "$item.st", "content": "<div class=\"btn bt\">$[pill ? \"\" : \"<image class=\\\"ic24\\\" src=\\\"{{$item.ic}}\\\"></image>\"]<text class=\"t-labelM c-onS ph-l $[pill ? \"\" : \"ml-a\"]\">{{$item.t}}</text><div class=\"ph-b {{$idx === 0 ? 'dis' : ''}}\" onclick=\"phUp($idx)\"><image class=\"ic24\" src=\"/common/ic/i_up.png\"></image></div><div class=\"ph-b\" onclick=\"phDel($idx)\"><image class=\"ic24\" src=\"/common/ic/i_close.png\"></image></div></div>"} -->
@@ -247,7 +247,7 @@ export default {
       const n = notes.find(x => x.id === detailId)
       if (!n) { this.popScr(); return }
       const t = T[n.k] || T.cus
-      L.dhRows = [{ ic: t.c, bg: t.bg, app: t.n, v: n.v, m: n.exp ? '剩 ' + rem(n.exp, now) + '$[pill ? "\\n" : " · "]' + at(n.exp, now) + ' 清除' : (n.k === 'tut' ? '教程 · 不会过期' : '不会过期'), soon: n.exp && n.exp - now < H1 }]
+      L.dhRows = [{ ic: t.c, bg: t.bg, app: t.n, v: n.v, m: n.exp ? '剩 ' + rem(n.exp, now) + '$[pill ? "\\n" : " · "]' + at(n.exp, now) + (at(n.exp, now).length > 5 ? '' : ' 清除') : (n.k === 'tut' ? '教程 · 不会过期' : '不会过期'), soon: n.exp && n.exp - now < H1 }]
       if (n.exp) act('acts', 'ext', '/common/ic/i_more.png', '$[pill ? "延长" : "延长 1 小时"]', '$[pill ? "+1 小时" : "到 "]' + ($[pill ? 'false' : 'true'] ? at(n.exp + H1, now) : ''), 'extend')
       act('acts', 'exp', '/common/ic/i_timer.png', '有效期', n.exp ? EL[n.ek] || '自定义' : '不过期', 'toExpNote')
       act('acts', 'pin', n.pin ? '/common/ic/i_pinf.png' : '/common/ic/i_pin.png', n.pin ? '取消置顶' : '置顶', n.pin ? '$[pill ? "已置顶" : "当前已置顶"]' : '排在最前', 'togglePin')
