@@ -31,7 +31,7 @@
 <!-- #component transforming-list-item {"style": "$item.st", "content": "<div class=\"btn {{$item.cls}}\" style=\"{{feedback[$item.id] || {opacity:1}}}\" ontouchstart=\"rDown($item.id)\" ontouchend=\"release($item.id)\" ontouchmove=\"rMove\" onclick=\"tapAct2($idx)\"><image class=\"ic24\" src=\"{{$item.ic}}\"></image><div class=\"bcol2\"><text class=\"t-labelM c-onS lab-w\">{{$item.t}}</text><text class=\"t-labelS c-onSV lab-w\" if=\"{{$item.s}}\">{{$item.s}}</text></div></div>"} -->
 </list-item>
 <list-item type="phr" class="li-row" for="{{phRows}}">
-<!-- #component transforming-list-item {"style": "$item.st", "content": "<div class=\"btn bt\">$[pill ? \"\" : \"<image class=\\\"ic24\\\" src=\\\"{{$item.ic}}\\\"></image>\"]<text class=\"t-labelM c-onS ph-l $[pill ? \"\" : \"ml-a\"]\">{{$item.t}}</text><div class=\"ph-b {{$idx === 0 ? 'dis' : ''}}\" onclick=\"phUp($idx)\"><image class=\"ic24\" src=\"/common/ic/i_up.png\"></image></div><div class=\"ph-b\" onclick=\"phDel($idx)\"><image class=\"ic24\" src=\"/common/ic/i_close.png\"></image></div></div>"} -->
+<!-- #component transforming-list-item {"style": "$item.st", "content": "<div class=\"btn bt\">$[(pill || rect) ? \"\" : \"<image class=\\\"ic24\\\" src=\\\"{{$item.ic}}\\\"></image>\"]<text class=\"t-labelM c-onS ph-l $[(pill || rect) ? \"\" : \"ml-a\"]\">{{$item.t}}</text><div class=\"ph-b {{$idx === 0 ? 'dis' : ''}}\" onclick=\"phUp($idx)\"><image class=\"ic24\" src=\"/common/ic/i_up.png\"></image></div><div class=\"ph-b\" onclick=\"phDel($idx)\"><image class=\"ic24\" src=\"/common/ic/i_close.png\"></image></div></div>"} -->
 </list-item>
 <list-item type="rb" class="li-row" for="{{radios}}">
 <!-- #component transforming-list-item {"style": "$item.st", "content": "<div class=\"btn {{sel === $idx ? 'bpc' : 'bt'}}\" style=\"{{feedback[$item.id] || {opacity:1}}}\" ontouchstart=\"rDown($item.id)\" ontouchend=\"release($item.id)\" ontouchmove=\"rMove\" onclick=\"choose($idx)\"><div class=\"bcol2 grow\"><text class=\"t-labelM c-onS lab-r\">{{$item.t}}</text><text class=\"t-labelS {{sel === $idx ? 'c-onPCv' : 'c-onSV'}} lab-r\">{{$item.s}}</text></div><div class=\"radio {{sel === $idx ? '' : 'radio-off'}}\"><div class=\"radio-dot {{sel === $idx ? '' : 'radio-dot-off'}}\"></div></div></div>"} -->
@@ -278,7 +278,7 @@ export default {
       act('acts2', 'phed', '/common/ic/i_lib.png', '编辑短语', '', 'toPhed', 'bc')
     } else if (s === 'set') {
       hdr('设置')
-      act('acts', 'defs', '/common/ic/i_timer.png', '默认期限', '按类型设置', 'toDefs')
+      act('acts', 'defs', '/common/ic/i_timer.png', '默认期限', '按类型', 'toDefs')
       act('acts', 'phs', '/common/ic/i_lib.png', '快捷短语', cfg.ph.length + ' 条', 'toPhed')
       act('acts', 'oobe', '/common/ic/i_help.png', '使用引导', '再看一遍', 'replay')
       act('acts', 'fav', '/common/ic/i_fav.png', '支持作者', '稍后开放', 'noop', 'bt dis')

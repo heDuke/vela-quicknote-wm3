@@ -69,8 +69,8 @@
 .lab-r { width: $[CW - BPL - BPR - dp(24) - dp(12) - 2]px; lines: 1; text-overflow: ellipsis; }
 .dis { opacity: 0.38; }
 /* phrase editor row: label + move-up + remove (24dp icons in 40dp tap slots) */
-.ph-l { width: $[CW - BPL - BPR - (pill ? 0 : dp(30)) - 2 * dp(pill ? 26 : 36) - 4]px; lines: $[pill ? 2 : 1]; text-overflow: ellipsis; }  /* 手环：不放前置图标，短语可折两行 */
-.ph-b { width: $[dp(pill ? 26 : 36)]px; height: $(40); justify-content: center; align-items: center; }
+.ph-l { width: $[CW - BPL - BPR - ((pill || rect) ? 0 : dp(30)) - 2 * dp(pill ? 26 : rect ? 30 : 36) - 4]px; lines: $[(pill || rect) ? 2 : 1]; text-overflow: ellipsis; }  /* 手环：不放前置图标，短语可折两行 */
+.ph-b { width: $[dp(pill ? 26 : rect ? 30 : 36)]px; height: $(40); justify-content: center; align-items: center; }
 /* about rows */
 .ab { width: $[CW]px; height: $[ROW]px; flex-direction: column; justify-content: center; padding-left: $(14); padding-right: $(14); }
 .ab-t { width: $[CW - dp(28)]px; font-size: $[pill ? dp(13) : dp(14)]px; line-height: $(18); color: $[C.onSurface]; font-weight: bold; text-align: $[round ? 'center' : 'left']; lines: 1; text-overflow: ellipsis; }
