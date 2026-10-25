@@ -1,0 +1,15 @@
+{
+  "package": "com.experiment.quicknote.wm3",
+  "name": "临时记事",
+  "versionName": "1.0.0",
+  "versionCode": 3,
+  "minPlatformVersion": 1200,
+  "minAPILevel": $[api],
+  "icon": "/common/logo.png",
+  "deviceTypeList": ["watch"],
+  "features": [{"name": "system.router"}, {"name": "system.vibrator"}, {"name": "system.storage"}$[pill ? '' : ', {"name": "system.file"}']],
+  "config": {"designWidth": $[W]},
+  "router": {"entry": "pages/main", "pages": {
+    "pages/main": {"component": "main"}$[pill ? '' : ', "pages/kb": {"component": "kb"}']}},
+  "display": {"backgroundColor": "#000000"}
+}

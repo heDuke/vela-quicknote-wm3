@@ -1,0 +1,13 @@
+node_modules/
+build/
+dist/
+out/
+src/
+*.rpk
+*.log
+# 签名：私钥与发布证书都不提交，用 tools/gen-sign.sh 在本地生成
+sign/
+*.pem
+*.key
+*.p12
+.DS_Store

@@ -1,0 +1,19 @@
+临时记事 (com.experiment.quicknote.wm3)
+Copyright (C) 2026 heDuke. All rights reserved.
+
+本应用包含以下第三方内容，按各自许可使用：
+
+1. vela-wear-m3 组件库 — Copyright (C) 2026 heDuke。
+   其中改编自 AndroidX Wear Compose Material3 的部分：
+   Copyright 2023, 2024, 2025 The Android Open Source Project，Apache License 2.0（见 Apache-2.0.txt）。
+   参考提交 2f557dc1f1ec71edae73e2c16b0e446523c644b7。
+2. Material Symbols 图标 — Google，Apache License 2.0（见 Apache-2.0.txt）。
+3. TimeText 等弧形文字图片由 Noto Sans SC 字体生成 — Copyright 2014-2021 Adobe，
+   SIL Open Font License 1.1（见 OFL-1.1-NotoSansSC.txt）。
+#IME
+4. 键盘输入法改编自「喵喵输入法 / Vela_input_method」— Copyright (c) 2024 NEORUAA，MIT（见 ime/MIT-Vela_input_method.txt）。
+5. 拼音单字词库源自 pinyinjs — Copyright (c) 2019 小茗同学 (https://github.com/sxei/)，MIT（见 ime/MIT-pinyinjs.txt）。
+#END
+
+Material、Wear OS、Android 与 Google 是 Google LLC 的商标；小米与 Vela 为其权利人的商标。
+本应用与 Google、小米无隶属、赞助或认证关系。

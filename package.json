@@ -1,0 +1,16 @@
+{
+  "name": "vela-quicknote-wm3",
+  "version": "1.0.0",
+  "private": true,
+  "description": "临时记事 — Xiaomi Vela JS 快应用（Wear Material 3 风格）",
+  "license": "UNLICENSED",
+  "scripts": {
+    "build": "bash tools/build.sh",
+    "preview": "node tools/preview.js"
+  },
+  "devDependencies": {
+    "aiot-toolkit": "^2.0.5",
+    "playwright-core": "^1.64.1",
+    "vela-wear-m3": "file:vendor/vela-wear-m3-0.1.0.tgz"
+  }
+}

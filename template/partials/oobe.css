@@ -1,0 +1,34 @@
+/* OOBE：HorizontalPager + HorizontalPageIndicator（库 pagerState 的 androidx PageIndicator 移植）。
+   每页 = 插图（真实 UI 元素缩小版 / Material Symbols）+ 标题 TitleMedium + 说明 BodyMedium；底部「跳过」CompactButton，末页「开始使用」FilledButton。 */
+/* #set OBW = round ? CW - dp(24) : CW */
+/* #set OBTOP = round ? dp(56) : pill ? dp(64) : dp(40) */
+/* #set OBBTN = round ? H - dp(96) : H - dp(pill ? 92 : 78) */
+.ob { position: absolute; left: 0px; top: 0px; width: $[W]px; height: $[H]px; background-color: #000000; }
+.ob-pg { position: absolute; left: 0px; top: $[OBTOP]px; width: $[W]px; height: $[OBBTN - OBTOP]px; flex-direction: column; align-items: center; justify-content: center; animation-name: obIn; animation-duration: 250ms; animation-timing-function: cubic-bezier(0.2, 0, 0, 1); }
+@keyframes obIn { 0% { opacity: 0; transform: translateX($(24)); } 100% { opacity: 1; transform: translateX(0px); } }
+.ob-ill { flex-direction: column; align-items: center; justify-content: center; height: $[dp(pill ? 76 : 72)]px; }
+.ob-c { width: $[dp(pill ? 52 : 64)]px; height: $[dp(pill ? 52 : 64)]px; border-width: 1px; border-radius: $[dp(pill ? 26 : 32)]px; justify-content: center; align-items: center; }
+.ob-pc { background-color: $[C.primaryContainer]; border-color: $[C.primaryContainer]; }
+.ob-sc { background-color: $[C.secondaryContainer]; border-color: $[C.secondaryContainer]; }
+.ob-tc { background-color: $[C.tertiaryContainer]; border-color: $[C.tertiaryContainer]; }
+.ob-big { width: $[dp(pill ? 32 : 40)]px; height: $[dp(pill ? 32 : 40)]px; }
+.ob-sm { width: $[dp(pill ? 18 : 20)]px; height: $[dp(pill ? 18 : 20)]px; }
+/* mini EdgeButton */
+.ob-eb { width: $[dp(pill ? 64 : 72)]px; height: $[dp(pill ? 30 : 34)]px; border-width: 1px; border-radius: $[dp(pill ? 15 : 17)]px; background-color: $[C.primary]; border-color: $[C.primary]; justify-content: center; align-items: center; }
+.ob-row { flex-direction: row; align-items: center; margin-top: $(8); }
+.ob-dot { width: $[dp(pill ? 22 : 26)]px; height: $[dp(pill ? 22 : 26)]px; border-width: 1px; border-radius: $[dp(pill ? 11 : 13)]px; justify-content: center; align-items: center; margin-left: $(3); margin-right: $(3); }
+.ob-ic16 { width: $(16); height: $(16); }
+/* mini SwipeToReveal */
+.ob-card { width: $[dp(pill ? 46 : 64)]px; height: $(40); border-width: 1px; border-radius: $(14); background-color: $[C.surfaceContainer]; border-color: $[C.surfaceContainer]; justify-content: center; padding-left: $(8); }
+.ob-ct { font-size: $(12); line-height: $(14); color: $[C.onSurface]; font-weight: bold; lines: 1; }
+.ob-a { width: $(32); height: $(40); border-width: 1px; border-radius: $(14); justify-content: center; align-items: center; margin-left: $(3); }
+.ob-as { background-color: $[C.surfaceContainer]; border-color: $[C.surfaceContainer]; }
+.ob-ap { width: $(40); background-color: $[C.error]; border-color: $[C.error]; }
+.ob-t { width: $[OBW]px; margin-top: $[dp(pill ? 10 : 8)]px; font-size: $[dp(pill ? 16 : 17)]px; line-height: $(20); color: $[C.onSurface]; font-weight: bold; text-align: center; lines: 1; }
+.ob-b { width: $[OBW]px; margin-top: $(4); font-size: $[dp(pill ? 13 : 14)]px; line-height: $(18); color: $[C.onSurfaceVariant]; text-align: center; lines: $[pill ? 4 : 3]; }
+.ob-btn { position: absolute; left: 0px; top: $[OBBTN]px; width: $[W]px; height: $(48); flex-direction: row; justify-content: center; align-items: center; }
+.ob-skip { background-color: $[C.surfaceContainer]; border-color: $[C.surfaceContainer]; }
+.ob-go { background-color: $[C.primary]; border-color: $[C.primary]; }
+.ob-gt { font-size: $[dp(pill ? 13 : 14)]px; color: $[C.onPrimary]; font-weight: bold; }
+.ob-st { font-size: $[dp(pill ? 13 : 14)]px; color: $[C.onSurface]; font-weight: bold; }
+.dot-on { opacity: 1; }

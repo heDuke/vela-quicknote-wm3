@@ -1,0 +1,36 @@
+/* TimePickerTokens: label Primary TitleMedium (TitleLarge on >=225dp), options NumeralSmall 30 (NumeralMedium 40 on >=225dp),
+   selected OnBackground, unselected SecondaryDim; option height 36-48dp (46-58dp large). Gradient (33%) is approximated by a
+   dimmed SecondaryDim, because an overlay PNG would swallow the drag that starts on it. */
+/* #set LG = round */
+/* #set PKN = pill ? 5 : 3 */
+/* #set OPT = dp(LG ? 42 : pill ? 36 : 44) */
+/* #set COLW = dp(pill ? 46 : LG ? 72 : 60) */
+/* #set EBTOP = H - dp(3) - png('edge_button')[1] */
+/* #set LABH = dp(LG ? 22 : 20) */
+/* #set CAPH = 0 */
+/* #set BLOCK = LABH + dp(4) + PKN * OPT + CAPH */
+/* #set TOP0 = pill ? dp(30) : round ? dp(14) : Math.max(dp(14), Math.round((EBTOP - BLOCK) / 2)) */
+.pk { position: absolute; left: 0px; top: $[TOP0]px; width: $[W]px; flex-direction: column; align-items: center; }
+.pk-l { width: $[CW]px; height: $[LABH]px; font-size: $[dp(LG ? 18 : 16)]px; line-height: $[LABH]px; color: $[C.primary]; font-weight: bold; text-align: center; lines: 1; }
+.pk-g { margin-top: $(4); flex-direction: row; align-items: flex-start; justify-content: center; }
+.pk-col { flex-direction: column; align-items: center; }
+.pk-c { width: $[COLW]px; height: $[PKN * OPT]px; font-size: $[dp(LG ? 40 : 30)]px; color: #8289B2; selected-font-size: $[dp(LG ? 40 : 30)]px; selected-color: $[C.onBackground]; selected-background-color: $[C.background]; }
+.pk-sep { width: $[dp(pill ? 14 : 28)]px; height: $[PKN * OPT]px; font-size: $[dp(LG ? 40 : 30)]px; line-height: $[PKN * OPT]px; color: $[C.onSurfaceVariant]; text-align: center; }
+.pk-cap { width: $[COLW]px; height: $[CAPH]px; font-size: $(12); line-height: $[CAPH]px; color: $[C.onSurfaceVariant]; text-align: center; }
+/* keys = FilledTonal (SurfaceContainer) stadium buttons, '-' and backspace = PrimaryContainer; digits LabelLarge-ish 20dp */
+/* #set KW = pill ? Math.floor((CW - dp(8)) / 3) : dp(round ? 46 : 48) */
+/* #set KH = dp(pill ? (Hdp > 310 ? 34 : 32) : round ? 32 : 34) */
+/* #set KG = dp(pill ? (Hdp > 310 ? 5 : 4) : 4) */
+/* #set GW = 3 * KW + 2 * KG */
+/* #set PT = round ? dp(20) : pill ? dp(30) : dp(22) */
+.np { position: absolute; left: 0px; top: 0px; width: $[W]px; height: $[H]px; flex-direction: column; align-items: center; padding-top: $[PT]px; }
+.np-l { width: $[CW]px; height: $(18); font-size: $[dp(pill ? 15 : 16)]px; line-height: $(18); color: $[C.primary]; font-weight: bold; text-align: center; }
+.np-pv { width: $[pill ? CW : GW]px; height: $[dp(pill ? 36 : 34)]px; flex-direction: row; align-items: center; justify-content: center; margin-bottom: $(4); }
+.np-txt { width: $[pill ? CW - dp(4) : GW - dp(44)]px; font-size: $[dp(pill ? 20 : 24)]px; line-height: $[dp(pill ? 24 : 28)]px; color: $[C.onBackground]; font-weight: bold; text-align: center; lines: 1; }
+.np-txt-s { font-size: $[dp(pill ? 16 : 18)]px; } /* 超过 7 位缩字号：lines:1 时超宽会在 '-' 处断行并隐藏后半段（模拟器实测） */
+.np-cs { color: $[C.primary]; font-weight: normal; }
+.np-row { width: $[GW]px; height: $[KH]px; flex-direction: row; justify-content: space-between; margin-bottom: $[KG]px; }
+.np-k { width: $[KW]px; height: $[KH]px; border-width: 1px; border-radius: $[KH / 2]px; background-color: $[C.surfaceContainer]; border-color: $[C.surfaceContainer]; justify-content: center; align-items: center; }
+.np-ks { background-color: $[C.primaryContainer]; border-color: $[C.primaryContainer]; }
+.np-n { font-size: $[dp(20)]px; line-height: $(24); color: $[C.onSurface]; font-weight: bold; }
+.np-ok { width: $(36); height: $(36); margin-left: $(8); border-width: 1px; border-radius: $(18); background-color: $[C.primaryDim]; border-color: $[C.primaryDim]; justify-content: center; align-items: center; }

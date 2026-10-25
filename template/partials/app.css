@@ -1,0 +1,81 @@
+/* 临时记事 v2 app classes. dp via $(); geometry from the library context (W/H/CW/HP/VP/ROW). Colours = Wear M3 dark scheme (tokens.js). */
+/* #set CARDH = dp(pill ? 84 : 64) */
+/* #set GAP = dp(4) */
+/* #set SECW = dp(pill ? 44 : rect ? 44 : 52) */
+/* #set PRIW = pill ? CW - dp(44) - dp(4) : dp(rect ? 60 : 70) */
+/* #set ACT = pill ? CW : SECW + PRIW + 2 * GAP */
+/* #set INW = CW - dp(24) - 2 */
+.ic-24 { width: $(24); height: $(24); }
+.c-onPriT { color: $[C.onPrimary]; }
+.c-err { color: $[C.error]; }
+.c-onErr { color: $[C.onError]; }
+.c-onPCv { color: $[C.onPrimaryContainer]; opacity: 0.9; }
+.li-row { width: $[W]px; height: $[ROW]px; flex-direction: column; align-items: center; justify-content: center; }
+.li-sub { width: $[W]px; height: $(48); flex-direction: column; align-items: center; justify-content: center; }
+.lsub { width: $[CW]px; height: $(48); padding-top: $(16); padding-bottom: $(8); padding-left: $(14); padding-right: $(14); align-items: flex-end; justify-content: $[round ? 'center' : 'flex-start']; }
+
+/* ---------- note card = Wear M3 AppCard (CardTokens: SurfaceContainer, CornerLarge 26dp, padding 12dp; appImage 18dp + 4dp,
+   appName TitleSmall OnSurface, time BodyMedium OnSurfaceVariant end-aligned, 6dp, title TitleMedium OnSurface).
+   Bands: time moves to its own line under the title (no room for the end-aligned time slot in 92dp). ---------- */
+.li-card { width: $[W]px; height: $[CARDH + GAP]px; flex-direction: column; align-items: center; justify-content: center; }
+.sr { width: $[CW]px; height: $[CARDH]px; flex-direction: row; align-items: center; }
+.nc { width: $[CW]px; height: $[CARDH]px; flex-shrink: 0; flex-direction: column; padding-left: $(12); padding-right: $(12); padding-top: $(12); border-width: 1px; border-radius: $(26); background-color: $[C.surfaceContainer]; border-color: $[C.surfaceContainer]; transition-property: width; transition-duration: 250ms; transition-timing-function: cubic-bezier(0.2, 0, 0, 1); }
+.nc-rv { width: $[Math.max(CW - ACT, dp(26))]px; }
+.nc-h { width: $[INW]px; height: $(16); flex-direction: row; align-items: center; }
+.nc-ic { width: $[dp(pill ? 16 : 18)]px; height: $[dp(pill ? 16 : 18)]px; flex-shrink: 0; }
+.nc-pin { width: $[dp(pill ? 12 : 14)]px; height: $[dp(pill ? 12 : 14)]px; margin-left: $(4); flex-shrink: 0; }
+.nc-app { font-size: $[pill ? dp(13) : dp(14)]px; line-height: $(16); color: $[C.onSurface]; font-weight: bold; margin-left: $(4); lines: 1; text-overflow: ellipsis; }
+.nc-sp { flex: 1; }
+.nc-tm { font-size: $[pill ? dp(13) : dp(14)]px; line-height: $(16); color: $[C.onSurfaceVariant]; margin-left: $(6); lines: 1; flex-shrink: 0; }
+.nc-soon { color: $[C.tertiary]; }
+.nc-ttl { width: $[INW]px; margin-top: $(6); font-size: $[pill ? dp(15) : dp(16)]px; line-height: $(18); color: $[C.onSurface]; font-weight: bold; lines: 1; text-overflow: ellipsis; }
+.nc-tm2 { width: $[INW]px; margin-top: $(4); font-size: $(13); line-height: $(16); color: $[C.onSurfaceVariant]; lines: 1; }
+/* SwipeToReveal actions (SwipeToRevealTokens: primary = Error/OnError, secondary = SurfaceContainer/OnSurface; icon 26dp;
+   anchors 64dp single / 130dp double; 4dp ActionContentSpacing). Bands: content leaves completely, actions fill the row. */
+.sa-s { width: $[SECW]px; height: $[CARDH]px; margin-left: $[pill ? 0 : GAP]px; flex-shrink: 0; border-width: 1px; border-radius: $(26); background-color: $[C.surfaceContainer]; border-color: $[C.surfaceContainer]; justify-content: center; align-items: center; }
+.sa-p { width: $[PRIW]px; height: $[CARDH]px; margin-left: $[GAP]px; flex-shrink: 0; flex-direction: row; border-width: 1px; border-radius: $(26); background-color: $[C.error]; border-color: $[C.error]; justify-content: center; align-items: center; }
+.sa-ic { width: $[dp(pill ? 24 : 26)]px; height: $[dp(pill ? 24 : 26)]px; }
+.sa-t { font-size: $(13); line-height: $(16); color: $[C.onError]; font-weight: bold; margin-left: $(4); }
+/* UndoActionButton: SurfaceContainer / OnSurface, full width of the item */
+.undo { width: $[CW]px; height: $[CARDH]px; flex-direction: row; border-width: 1px; border-radius: $(26); background-color: $[C.surfaceContainer]; border-color: $[C.surfaceContainer]; justify-content: center; align-items: center; }
+.undo-t { font-size: $[pill ? dp(13) : dp(15)]px; line-height: $(18); color: $[C.onSurface]; font-weight: bold; margin-left: $(6); }
+
+/* empty state */
+.li-empty { width: $[W]px; height: $[dp(pill ? 150 : 104)]px; flex-direction: column; align-items: center; justify-content: center; }
+.empty { width: $[CW]px; flex-direction: column; align-items: center; }
+.e-ic { width: $(32); height: $(32); }
+.e-t { margin-top: $(8); font-size: $[pill ? dp(15) : dp(16)]px; line-height: $(18); color: $[C.onSurface]; font-weight: bold; text-align: center; }
+.e-b { width: $[CW - dp(pill ? 0 : 24)]px; margin-top: $(4); font-size: $(14); line-height: $(16); color: $[C.onSurfaceVariant]; text-align: center; lines: 3; }
+
+/* button with secondary label (Button: label LabelMedium, secondaryLabel LabelSmall OnSurfaceVariant) */
+.lab-w { width: $[LABW2]px; lines: 1; text-overflow: ellipsis; }
+.bcol2 { flex-direction: column; margin-left: $(6); }
+
+/* detail header */
+/* #set HDH = dp(pill ? 148 : round ? 104 : 100) */
+.li-dh { width: $[W]px; height: $[HDH]px; flex-direction: column; align-items: center; justify-content: center; }
+.dh { width: $[CW - dp(round ? 16 : 0)]px; flex-direction: column; align-items: $[rect ? 'flex-start' : 'center']; }
+.dh-r { flex-direction: row; align-items: center; }
+.dh-app { font-size: $(14); line-height: $(16); color: $[C.primary]; font-weight: bold; margin-left: $(6); }
+.dh-v { width: $[CW - dp(round ? 16 : 0)]px; margin-top: $(6); font-size: $[dp(pill ? 20 : 24)]px; line-height: $[dp(pill ? 24 : 26)]px; color: $[C.onSurface]; font-weight: bold; text-align: $[rect ? 'left' : 'center']; lines: 2; text-overflow: ellipsis; }
+.dh-m { width: $[CW - dp(round ? 16 : 0)]px; margin-top: $(6); font-size: $(14); line-height: $(16); color: $[C.onSurfaceVariant]; text-align: $[rect ? 'left' : 'center']; lines: 2; }
+
+/* radio (RadioButtonTokens: unselected control = Outline; selected container PrimaryContainer) */
+.radio-off { border-color: $[C.outline]; }
+.radio-dot-off { opacity: 0; }
+.ml-a { margin-left: $(6); }
+
+/* ---------- 1.0 additions ---------- */
+.lab-r { width: $[CW - BPL - BPR - dp(24) - dp(12) - 2]px; lines: 1; text-overflow: ellipsis; }
+.dis { opacity: 0.38; }
+/* phrase editor row: label + move-up + remove (24dp icons in 40dp tap slots) */
+.ph-l { width: $[pill ? CW - dp(18) - dp(52) - 4 : CW - dp(28) - dp(80)]px; lines: $[pill ? 2 : 1]; text-overflow: ellipsis; }  /* 手环：不放前置图标，短语可折两行 */
+.ph-b { width: $[dp(pill ? 26 : 40)]px; height: $(40); justify-content: center; align-items: center; }
+/* about rows */
+.ab { width: $[CW]px; height: $[ROW]px; flex-direction: column; justify-content: center; padding-left: $(14); padding-right: $(14); }
+.ab-t { width: $[CW - dp(28)]px; font-size: $[pill ? dp(13) : dp(14)]px; line-height: $(18); color: $[C.onSurface]; font-weight: bold; text-align: $[round ? 'center' : 'left']; lines: 1; text-overflow: ellipsis; }
+.ab-s { width: $[CW - dp(28)]px; font-size: $[pill ? dp(11) : dp(12)]px; line-height: $(16); color: $[C.onSurfaceVariant]; text-align: $[round ? 'center' : 'left']; lines: 2; }
+/* full-screen non-list screens */
+.full { position: absolute; left: 0px; top: 0px; width: $[W]px; height: $[H]px; flex-direction: column; align-items: center; }
+/* 左缘右滑返回的触摸条（近乎透明；完全透明的 div 在 Vela 上不参与命中测试） */
+.edge-bk { position: absolute; left: 0px; top: 0px; width: $[pill ? 34 : 32]px; height: $[H]px; background-color: rgba(0,0,0,0.02); }
