@@ -78,4 +78,4 @@
 /* full-screen non-list screens */
 .full { position: absolute; left: 0px; top: 0px; width: $[W]px; height: $[H]px; flex-direction: column; align-items: center; }
 /* 左缘右滑返回的触摸条（近乎透明；完全透明的 div 在 Vela 上不参与命中测试） */
-.edge-bk { position: absolute; left: 0px; top: 0px; width: $[pill ? 34 : 32]px; height: $[H]px; background-color: rgba(0,0,0,0.02); }
+.edge-bk { position: absolute; left: 0px; top: 0px; width: $[pill ? 34 : 42]px; height: $[H]px; background-color: rgba(0,0,0,0.02); }

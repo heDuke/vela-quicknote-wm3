@@ -278,20 +278,20 @@ export default {
       act('acts2', 'phed', '/common/ic/i_lib.png', '编辑短语', '', 'toPhed', 'bc')
     } else if (s === 'set') {
       hdr('设置')
-      act('acts', 'defs', '/common/ic/i_timer.png', '默认有效期', '按类型设置', 'toDefs')
+      act('acts', 'defs', '/common/ic/i_timer.png', '默认期限', '按类型设置', 'toDefs')
       act('acts', 'phs', '/common/ic/i_lib.png', '快捷短语', cfg.ph.length + ' 条', 'toPhed')
       act('acts', 'oobe', '/common/ic/i_help.png', '使用引导', '再看一遍', 'replay')
       act('acts', 'fav', '/common/ic/i_fav.png', '支持作者', '稍后开放', 'noop', 'bt dis')
       act('acts', 'about', '/common/ic/i_info.png', '关于', '版本 ' + VER, 'toAbout')
     } else if (s === 'defs') {
-      hdr('默认有效期')
+      hdr('默认期限')
       ;['park', 'pkg', 'lock', 'ph', 'cus'].forEach(k => act('acts', 'd' + k, '/common/ic/i_timer.png', T[k].n, EL[this.ek(k)], 'toExpDef', 'bt', k))
       L.acts.forEach((a, i) => { a.arg = ['park', 'pkg', 'lock', 'ph', 'cus'][i] })
     } else if (s === 'phed') {
       hdr('快捷短语')
       L.phRows = cfg.ph.map((p, i) => ({ id: 'q' + i, t: p, ic: lib(p)[2], st: IDENT }))
       if (KB) act('acts2', 'pkb', '/common/ic/i_kb.png', '自己写', '键盘输入', 'phKb')
-      act('acts2', 'plib', '/common/ic/i_add.png', '添加短语', '短语库 ' + LIB.filter(l => cfg.ph.indexOf(l[0]) < 0).length + ' 条', 'toLib')
+      act('acts2', 'plib', '/common/ic/i_add.png', '添加短语', LIB.filter(l => cfg.ph.indexOf(l[0]) < 0).length + ' 条可选', 'toLib')
       act('acts2', 'prst', '/common/ic/i_hist.png', '恢复默认', '', 'phReset', 'bc')
     } else if (s === 'lib') {
       hdr('短语库')
