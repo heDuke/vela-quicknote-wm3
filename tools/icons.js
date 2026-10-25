@@ -8,7 +8,7 @@ const L=[ // file, svg, role, dp
  ['a_call','call','primaryDim','app'],['a_cart','shopping_cart','primaryDim','app'],['a_key','key','primaryDim','app'],['a_med','medication','primaryDim','app'],
  ['a_note','edit_note','primaryDim','app'],['a_edit','edit','secondaryDim','app'],['a_tut','lightbulb','tertiaryDim','app'],
  ['a_pin','push_pin_fill','primary','pin'],
- ['c_park','local_parking','onTertiary','sec'],['c_pkg','package_2','onSecondary','sec'],['c_lock','inventory_2','onPrimary','sec'],['c_edit','keyboard','onSecondary','sec'],
+ ['c_park','local_parking','onTertiary','sec'],['c_pkg','package_2','onSecondary','sec'],['c_lock','inventory_2','onPrimary','sec'],['c_edit','edit','onSecondary','sec'],
  ['c_tut','lightbulb','onTertiary','sec'],['c_note','edit_note','onPrimary','sec'],
  ['i_call','call','primary',24],['i_cart','shopping_cart','primary',24],['i_key','key','primary',24],['i_med','medication','primary',24],['i_note','edit_note','primary',24],
  ['i_more','more_time','primary',24],['i_timer','timer','primary',24],['i_pinf','push_pin_fill','primary',24],['i_pin','push_pin','primary',24],
@@ -24,7 +24,7 @@ const L=[ // file, svg, role, dp
 (async()=>{const b=await chromium.launch({executablePath:process.env.CHROME_PATH||'/usr/bin/google-chrome'});const pg=await b.newPage();
 for(const[id,d]of Object.entries(D)){const dir=path.join(__dirname,'../assets',id);fs.rmSync(dir,{recursive:true,force:true});fs.mkdirSync(dir,{recursive:true});
  const pill=d.shape==='pill';
- for(const[f,svg,role,dp0]of L){const dp=dp0==='sec'?(d.shape==='circle'?20:16):dp0==='app'?(pill?16:18):dp0==='pin'?(pill?12:14):dp0==='act'?(pill?24:26):dp0==='big'?(pill?32:40):dp0==='obs'?(pill?18:20):dp0,s=Math.round(dp*d.k);
+ for(const[f,svg,role,dp0]of L){const dp=dp0==='sec'?(d.shape==='circle'?20:16):dp0==='app'?(pill?16:18):dp0==='pin'?(pill?12:14):dp0==='act'?(pill?24:26):dp0==='big'?32:dp0==='obs'?(pill?18:20):dp0,s=Math.round(dp*d.k);
   let src=fs.readFileSync(path.join(__dirname,'icons',svg+'.svg'),'utf8');if(!/viewBox/.test(src))src=src.replace('<svg ','<svg viewBox="0 0 24 24" ');
   src=src.replace(/height="24(px)?"/,`height="${s}"`).replace(/width="24(px)?"/,`width="${s}"`).replace(/<path /g,`<path fill="${C[role]}" `);
   await pg.setViewportSize({width:s,height:s});await pg.setContent(`<html><body style="margin:0;background:transparent">${src.replace('<svg ','<svg style="display:block" ')}</body></html>`);

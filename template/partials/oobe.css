@@ -1,22 +1,22 @@
 /* OOBE：HorizontalPager + HorizontalPageIndicator（库 pagerState 的 androidx PageIndicator 移植）。
    每页 = 插图（真实 UI 元素缩小版 / Material Symbols）+ 标题 TitleMedium + 说明 BodyMedium；底部「跳过」CompactButton，末页「开始使用」FilledButton。 */
 /* #set OBW = round ? CW - dp(24) : CW */
-/* #set OBTOP = round ? dp(56) : pill ? dp(64) : dp(40) */
-/* #set OBBTN = round ? H - dp(96) : H - dp(pill ? 92 : 78) */
+/* #set OBTOP = round ? dp(30) : pill ? dp(64) : dp(26) */
+/* #set OBBTN = round ? H - dp(70) : H - dp(pill ? 92 : 64) */
 .ob { position: absolute; left: 0px; top: 0px; width: $[W]px; height: $[H]px; background-color: #000000; }
 .ob-pg { position: absolute; left: 0px; top: $[OBTOP]px; width: $[W]px; height: $[OBBTN - OBTOP]px; flex-direction: column; align-items: center; justify-content: center; animation-name: obIn; animation-duration: 250ms; animation-timing-function: cubic-bezier(0.2, 0, 0, 1); }
 @keyframes obIn { 0% { opacity: 0; transform: translateX($(24)); } 100% { opacity: 1; transform: translateX(0px); } }
-.ob-ill { flex-direction: column; align-items: center; justify-content: center; height: $[dp(pill ? 76 : 72)]px; }
-.ob-c { width: $[dp(pill ? 52 : 64)]px; height: $[dp(pill ? 52 : 64)]px; border-width: 1px; border-radius: $[dp(pill ? 26 : 32)]px; justify-content: center; align-items: center; }
+.ob-ill { flex-direction: column; align-items: center; justify-content: center; }
+.ob-c { width: $(52); height: $(52); border-width: 1px; border-radius: $(26); justify-content: center; align-items: center; }
 .ob-pc { background-color: $[C.primaryContainer]; border-color: $[C.primaryContainer]; }
 .ob-sc { background-color: $[C.secondaryContainer]; border-color: $[C.secondaryContainer]; }
 .ob-tc { background-color: $[C.tertiaryContainer]; border-color: $[C.tertiaryContainer]; }
-.ob-big { width: $[dp(pill ? 32 : 40)]px; height: $[dp(pill ? 32 : 40)]px; }
+.ob-big { width: $(32); height: $(32); }
 .ob-sm { width: $[dp(pill ? 18 : 20)]px; height: $[dp(pill ? 18 : 20)]px; }
 /* mini EdgeButton */
-.ob-eb { width: $[dp(pill ? 64 : 72)]px; height: $[dp(pill ? 30 : 34)]px; border-width: 1px; border-radius: $[dp(pill ? 15 : 17)]px; background-color: $[C.primary]; border-color: $[C.primary]; justify-content: center; align-items: center; }
-.ob-row { flex-direction: row; align-items: center; margin-top: $(8); }
-.ob-dot { width: $[dp(pill ? 22 : 26)]px; height: $[dp(pill ? 22 : 26)]px; border-width: 1px; border-radius: $[dp(pill ? 11 : 13)]px; justify-content: center; align-items: center; margin-left: $(3); margin-right: $(3); }
+.ob-eb { width: $(64); height: $(28); border-width: 1px; border-radius: $(14); background-color: $[C.primary]; border-color: $[C.primary]; justify-content: center; align-items: center; }
+.ob-row { flex-direction: row; align-items: center; margin-top: $(6); }
+.ob-dot { width: $(22); height: $(22); border-width: 1px; border-radius: $(11); justify-content: center; align-items: center; margin-left: $(3); margin-right: $(3); }
 .ob-ic16 { width: $(16); height: $(16); }
 /* mini SwipeToReveal */
 .ob-card { width: $[dp(pill ? 46 : 64)]px; height: $(40); border-width: 1px; border-radius: $(14); background-color: $[C.surfaceContainer]; border-color: $[C.surfaceContainer]; justify-content: center; padding-left: $(8); }

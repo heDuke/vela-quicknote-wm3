@@ -1,5 +1,6 @@
 // 记事类型、有效期预设与时间格式（main 页与键盘页共用）。
-export const H1 = 3600000
+// 测试构建（QN_FAST=1 bash tools/build.sh）把「1 小时」缩成 1 分钟，用来在模拟器上验证到期清理
+export const H1 = $[process.env.QN_FAST ? 60000 : 3600000]
 export const EK = ['h1', 'h3', 'today', 'tmr', 'd3', 'never']
 export const EL = { h1: '1 小时', h3: '3 小时', today: '今天内', tmr: '明天', d3: '3 天', never: '不过期' }
 // 各类型默认有效期（设置里可改）

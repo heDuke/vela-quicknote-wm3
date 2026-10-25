@@ -51,10 +51,10 @@
 
 <!-- 取件码：数字键盘（键位静态展开：for 内 onclick 带 $item 嵌套参数在模拟器上取值不可靠） -->
 <div class="np" if="{{scr === 'numpad'}}">
-  <text class="np-l">取件码</text>
+  <text class="np-l">{{npLabel}}</text>
   <div class="np-pv"><text class="np-txt {{draft.length > 7 ? 'np-txt-s' : ''}}"><span>{{draft}}</span><span class="np-cs">|</span></text>
 <!-- #if !pill -->
-  <div class="np-ok {{draft ? '' : 'dis'}}" onclick="saveCode"><image class="ic-24" src="/common/ic/i_check.png"></image></div>
+  <div class="np-ok {{draft || numKind === 'cus' ? '' : 'dis'}}" onclick="saveCode"><image class="ic-24" src="/common/ic/i_check.png"></image></div>
 <!-- #endif -->
   </div>
   <div class="np-row"><div class="np-k" onclick="key('1')"><text class="np-n">1</text></div><div class="np-k" onclick="key('2')"><text class="np-n">2</text></div><div class="np-k" onclick="key('3')"><text class="np-n">3</text></div></div>
@@ -79,9 +79,7 @@
     <div class="ob-ill" if="{{$item.k === 0}}"><div class="ob-c ob-pc"><image class="ob-big" src="/common/ic/o_note.png"></image></div></div>
     <div class="ob-ill" if="{{$item.k === 1}}"><div class="ob-eb"><image class="ob-sm" src="/common/ic/o_add.png"></image></div>
       <div class="ob-row"><div class="ob-dot bg-td"><image class="ob-ic16" src="/common/ic/c_park.png"></image></div><div class="ob-dot bg-sd"><image class="ob-ic16" src="/common/ic/c_pkg.png"></image></div><div class="ob-dot bg-pd"><image class="ob-ic16" src="/common/ic/c_note.png"></image></div>
-<!-- #if !pill -->
       <div class="ob-dot bg-sd"><image class="ob-ic16" src="/common/ic/c_edit.png"></image></div>
-<!-- #endif -->
       </div></div>
     <div class="ob-ill" if="{{$item.k === 2}}"><div class="ob-row"><div class="ob-card"><text class="ob-ct">$[pill ? "B2" : "B2 · C"]</text></div><div class="ob-a ob-as"><image class="ob-sm" src="/common/ic/o_pin.png"></image></div><div class="ob-a ob-ap"><image class="ob-sm" src="/common/ic/o_del.png"></image></div></div></div>
     <div class="ob-ill" if="{{$item.k === 3}}"><div class="ob-c ob-tc"><image class="ob-big" src="/common/ic/o_timer.png"></image></div></div>
@@ -160,10 +158,10 @@ const PHDEF = ['回电话', '买东西', '带钥匙', '吃药']
 const PHMAX = 8
 function lib(t) { for (let i = 0; i < LIB.length; i++) if (LIB[i][0] === t) return LIB[i]; return [t, '/common/ic/a_note.png', '/common/ic/i_note.png'] }
 // 引导结束后放进列表的教程记事（不过期，读完可自行删除）：[内容, 提示]
-const TUT = [['左滑我试试', '置顶/删除'], ['点开看详情', '改有效期'], ['点 + 新建', '模板/短语'], ['到期自动清理', '不用手动删']]
+const TUT = [['左滑我试试', '置顶/删除'], ['点开看详情', '改有效期'], ['点 + 新建', '选类型/自定义'], ['到期自动清理', '不用手动删']]
 const OB = [
   ['临时记事', '随手记下停车位、取件码$[pill ? "" : "等小事"]，到期自动清理'],
-  ['点 + 新建', '$[pill ? "选模板，或点一下常用短语" : "选模板、点一下常用短语，或用键盘自己写"]'],
+  ['点 + 新建', '$[pill ? "先选类型，也可自定义或点常用短语" : "先选类型，自定义可以用键盘写"]'],
   ['左滑卡片', '置顶或删除，删错了可以撤销'],
   ['到期自动清理', '$[pill ? "点开记事可改有效期或标记完成" : "点开记事能改有效期，✓ 标记完成"]']
 ]
@@ -179,7 +177,7 @@ let notes = []          // 全部记事（存储顺序）
 let cfg = {}
 let stack = []          // 内部屏栈
 let view = []           // 列表卡片对应的记事（排序后）
-let lastY = 0, moved = 0, rx0 = 0, ry0 = 0, bx0 = 0, bgo = 0, swiped = 0, tsw = 0, tx0 = 0, ty0 = 0, tx = 0, ty = 0
+let numKind = 'pkg', cusPh = '', cusList = [], lastY = 0, moved = 0, rx0 = 0, ry0 = 0, bx0 = 0, bgo = 0, swiped = 0, tsw = 0, tx0 = 0, ty0 = 0, tx = 0, ty = 0
 let undo = null         // { n, timer }
 let detailId = '', expMode = '', defKind = '', pkKind = 'park'
 let obX0 = 0, obX = 0
@@ -190,7 +188,7 @@ export default {
     isHome: true, tlcOn: true, tlcBase: -1, scr: 'boot', isList: false, ebOn: false, ebSt: {},
     hdrRows: [], dhRows: [], cards: [], emptyRows: [], tpls: [], acts: [], abRows: [], subRows: [], acts2: [], phRows: [], radios: [], sel: -1,
     dlgOn: false, dlgOut: false, dlgTitle: '', dlgText: '', dlgKind: '', cfOn: false, cfOut: false,
-    pkLabel: '', r1: [], r2: [], s1: 0, s2: 0, sep: '', draft: '',
+    npLabel: '取件码', pkLabel: '', r1: [], r2: [], s1: 0, s2: 0, sep: '', draft: '',
     obi: 0, obPg: [], pageIndex: 0, pageCount: 4, dots: [], worm: [], pageWindow: 0, pagerBox: {}, pagerBackground: ''
   },
   onInit() { this.reload(true) },
@@ -272,7 +270,8 @@ export default {
         { id: 't1', ic: T.pkg.c, bg: T.pkg.bg, t: '取件码', s: '数字键盘', fn: 'toNumpad', st: IDENT },
         { id: 't2', ic: T.lock.c, bg: T.lock.bg, t: '储物柜', s: '$[pill ? "区+柜号" : "区 + 柜号"]', fn: 'toLock', st: IDENT }
       ]
-      if (KB) L.tpls.push({ id: 't3', ic: T.cus.c, bg: T.cus.bg, t: '自定义', s: '键盘输入', fn: 'toKb', st: IDENT })
+      // 自定义：圆屏/Pro 打开键盘；手环 = 从短语库选一句 + 可选数字
+      L.tpls.push({ id: 't3', ic: T.cus.c, bg: T.cus.bg, t: '自定义', s: KB ? '键盘输入' : '短语+数字', fn: KB ? 'toKb' : 'toCus', st: IDENT })
       L.subRows = [{ t: '一键记下' }]
       const pe = EL[this.ek('ph')]
       cfg.ph.forEach((p, i) => act('acts2', 'p' + i, lib(p)[2], p, pe + '$[pill ? "" : "后清除"]'.replace('今天内后清除', '今天内').replace('明天后清除', '到明天').replace('不过期后清除', '不过期'), 'savePh'))
@@ -286,7 +285,7 @@ export default {
       act('acts', 'about', '/common/ic/i_info.png', '关于', '版本 ' + VER, 'toAbout')
     } else if (s === 'defs') {
       hdr('默认有效期')
-      ;['park', 'pkg', 'lock', 'ph'].concat(KB ? ['cus'] : []).forEach(k => act('acts', 'd' + k, '/common/ic/i_timer.png', T[k].n, EL[this.ek(k)], 'toExpDef', 'bt', k))
+      ;['park', 'pkg', 'lock', 'ph', 'cus'].forEach(k => act('acts', 'd' + k, '/common/ic/i_timer.png', T[k].n, EL[this.ek(k)], 'toExpDef', 'bt', k))
       L.acts.forEach((a, i) => { a.arg = ['park', 'pkg', 'lock', 'ph', 'cus'][i] })
     } else if (s === 'phed') {
       hdr('快捷短语')
@@ -305,8 +304,12 @@ export default {
         .map((r, i) => ({ id: 'a' + i, t: r[0], s: r[1], st: IDENT }))
     } else if (s === 'picker') {
       const c = PK[pkKind]; this.pkLabel = c.label; this.r1 = c.r1; this.r2 = c.r2; this.s1 = c.s1; this.s2 = c.s2; this.sep = c.sep
+    } else if (s === 'cpick') {
+      hdr('$[pill ? "选一句" : "选一句短语"]')
+      cusList.forEach((p, i) => act('acts', 'k' + i, lib(p)[2], p, '', 'cusPick'))
     } else if (s === 'numpad') {
       if (reset) this.draft = ''
+      this.npLabel = numKind === 'cus' ? cusPh + ' + 数字' : '取件码'
     } else if (s === 'oobe') {
       if (reset) this.obi = 0
       this.obShow()
@@ -319,7 +322,7 @@ export default {
   card(n, now) {
     const t = T[n.k] || T.cus, tut = n.k === 'tut'
     const left = n.exp ? rem(n.exp, now) : '不过期'
-    return { id: n.id, ic: n.k === 'ph' ? lib(n.v)[1] : t.a, app: t.n, ttl: n.v, pin: n.pin,
+    return { id: n.id, ic: n.k === 'ph' ? lib(n.v)[1] : (n.ic || t.a), app: t.n, ttl: n.v, pin: n.pin,
       tm: tut ? n.h : left, tm2: tut ? n.h : (n.exp ? '剩 ' + left : '不过期'), soon: !!n.exp && n.exp - now < H1,
       rv: false, ud: false, hc: false, st: IDENT }
   },
@@ -417,13 +420,18 @@ export default {
   // ---------- 新建 ----------
   toPark() { pkKind = 'park'; this.open('picker') },
   toLock() { pkKind = 'lock'; this.open('picker') },
-  toNumpad() { this.open('numpad') },
+  toNumpad() { numKind = 'pkg'; this.open('numpad') },
+  toCus() { this.vib(); const a = cfg.ph.slice(); LIB.forEach(l => { if (a.indexOf(l[0]) < 0) a.push(l[0]) }); cusList = a; this.open('cpick') },
+  cusPick(i) { const p = cusList[i]; if (p === undefined) return; cusPh = p; numKind = 'cus'; this.open('numpad') },
   toKb() { if (!unlocked()) return; this.vib(); router.push({ uri: '/pages/kb', params: { m: 'note' } }) },
   ch1(e) { this.s1 = e.newSelected; this.vib() },
   ch2(e) { this.s2 = e.newSelected; this.vib() },
   savePk() { const c = PK[pkKind]; if (this.add(pkKind, c.fmt(c.r1[this.s1], c.r2[this.s2]))) this.saved() },
   key(k) { this.vib(); if (k === 'bk') this.draft = this.draft.slice(0, -1); else if (this.draft.length < 10) this.draft += k },
-  saveCode() { if (!this.draft) return; if (this.add('pkg', this.draft)) this.saved() },
+  saveCode() {
+    if (numKind === 'cus') { if (this.add('cus', cusPh + (this.draft ? ' ' + this.draft : ''), lib(cusPh)[1])) this.saved(); return }
+    if (!this.draft) return; if (this.add('pkg', this.draft)) this.saved()
+  },
   savePh(i) { const p = cfg.ph[i]; if (p === undefined) return; this.vib(); if (this.add('ph', p)) this.saved() },
   // ---------- 设置 / 短语 ----------
   toDefs() { this.open('defs') },
