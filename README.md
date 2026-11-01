@@ -39,7 +39,7 @@ QN_FAST=1 bash tools/build.sh band10   # 测试包：1 小时按 1 分钟计算�
 - `tools/compose.py`：生成四机型拼图。
 
 ## 许可
-- 本应用闭源，© heDuke。
+- 本应用现已开源，© heDuke。
 - 第三方声明见 `legal/NOTICE.txt`，随包放在 `/common/legal/`：
   - vela-wear-m3 中改编自 AndroidX 的部分与 Material Symbols 图标：Apache-2.0；
   - Noto Sans SC：OFL-1.1；
