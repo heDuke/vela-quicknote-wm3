@@ -1,4 +1,4 @@
-# 临时记事 · Wear M3（com.experiment.quicknote.wm3）
+# QuickNote · Wear M3（com.heduke.quicknote）
 
 小米 Vela JS 快应用：随手记下停车位、取件码等小事，到期自动清理。界面基于 vela-wear-m3（Wear OS Material 3 移植）。
 
@@ -44,3 +44,8 @@ QN_FAST=1 bash tools/build.sh band10   # 测试包：1 小时按 1 分钟计算�
   - vela-wear-m3 中改编自 AndroidX 的部分与 Material Symbols 图标：Apache-2.0；
   - Noto Sans SC：OFL-1.1；
   - 喵喵输入法（NEORUAA）与 pinyinjs（小茗同学）：MIT。
+
+## AstroBox 1.0.1（versionCode 4）
+- 产品名称统一为 QuickNote（引导、列表、关于）；商店和安装包统一使用 `assets/logo.png` 紫色便笺图标。
+- 本轮提交只发布 `round`（466×466）、`band9`（192×490）、`band10`（212×520）三个 release 包，沿用既有本地签名。
+- `pro` 仍是开发构建选项，不属于本轮商店下载范围；屏幕规格匹配不代表已完成对应真机验证。

@@ -1,5 +1,5 @@
 <template>
-<!-- 临时记事 1.0：单页应用。所有“屏”共用一个页面（列表 / 详情 / 有效期 / 新建 / Picker / 数字键盘 / 设置 / 短语 / 关于 / 引导），
+<!-- QuickNote 1.0：单页应用。所有“屏”共用一个页面（列表 / 详情 / 有效期 / 新建 / Picker / 数字键盘 / 设置 / 短语 / 关于 / 引导），
      共享一份库运行时与样式，手环包比多页面小约一半。返回键 / 右滑由 overlayBack() 弹出内部屏栈。
      库的 layout.describe 只读模板里第一个 <list>：下面这个注释里的空 list 让 PAGE_LAYOUT 为空，行高由本页 relayout() 提供。
      <list></list> -->
@@ -135,7 +135,7 @@ const KB = $[pill ? 'false' : 'true'] // 自定义键盘只在圆屏 / 方屏
 // 行高（px），与 app.css / m3.css 中的类一致
 const RH = { padt: $[VP], hdr: $[dp(48)], dh: $[HDH], note: $[CARDH + GAP], empty: $[dp(pill ? 150 : 104)], row: $[ROW], sub: $[dp(48)], padb: $[EBPAD] }
 const SWX = $[dp(32)]
-const VER = '1.0.0'
+const VER = '1.0.1'
 // 类型：名称、卡片小图标、彩色圆底图标、圆底色
 const T = {
   park: { n: '停车', a: '/common/ic/a_park.png', c: '/common/ic/c_park.png', bg: 'bg-td' },
@@ -160,7 +160,7 @@ function lib(t) { for (let i = 0; i < LIB.length; i++) if (LIB[i][0] === t) retu
 // 引导结束后放进列表的教程记事（不过期，读完可自行删除）：[内容, 提示]
 const TUT = [['左滑我试试', '置顶/删除'], ['点开看详情', '改有效期'], ['点 + 新建', '选类型/自定义'], ['到期自动清理', '不用手动删']]
 const OB = [
-  ['临时记事', '随手记下停车位、取件码$[pill ? "" : "等小事"]，到期自动清理'],
+  ['QuickNote', '随手记下停车位、取件码$[pill ? "" : "等小事"]，到期自动清理'],
   ['点 + 新建', '$[pill ? "先选类型，也可自定义或点常用短语" : "先选类型，自定义可以用键盘写"]'],
   ['左滑卡片', '置顶或删除，删错了可以撤销'],
   ['到期自动清理', '$[pill ? "点开记事可改有效期或标记完成" : "点开记事能改有效期，✓ 标记完成"]']
@@ -237,7 +237,7 @@ export default {
     const act = (arr, id, ic, t, sub, fn, cls) => L[arr].push({ id, ic, t, s: sub || '', fn, cls: cls || 'bt', st: IDENT })
     const now = Date.now()
     if (s === 'list') {
-      hdr('临时记事')
+      hdr('QuickNote')
       view = notes.slice().sort((a, b) => (b.pin ? 1 : 0) - (a.pin ? 1 : 0) || b.ct - a.ct)
       L.cards = view.map(n => this.card(n, now))
       if (!view.length) L.emptyRows = [{ id: 'e' }]
@@ -299,7 +299,7 @@ export default {
       if (!L.acts.length) L.subRows = [{ t: '都已添加' }]
     } else if (s === 'about') {
       hdr('关于')
-      L.abRows = [['临时记事 ' + VER, '到期自动清理的小记事'], ['界面', '基于 vela-wear-m3 · © heDuke'], ['图标', 'Material Symbols · Apache-2.0']]
+      L.abRows = [['QuickNote ' + VER, '到期自动清理的小记事'], ['界面', '基于 vela-wear-m3 · © heDuke'], ['图标', 'Material Symbols · Apache-2.0']]
         .concat(KB ? [['输入法', '改编自喵喵输入法 · MIT']] : []).concat([['字体', 'Noto Sans SC · OFL-1.1'], ['许可全文', '见安装包 /common/legal/']])
         .map((r, i) => ({ id: 'a' + i, t: r[0], s: r[1], st: IDENT }))
     } else if (s === 'picker') {

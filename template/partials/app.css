@@ -1,4 +1,4 @@
-/* 临时记事 v2 app classes. dp via $(); geometry from the library context (W/H/CW/HP/VP/ROW). Colours = Wear M3 dark scheme (tokens.js). */
+/* QuickNote app classes. dp via $(); geometry from the library context (W/H/CW/HP/VP/ROW). Colours = Wear M3 dark scheme (tokens.js). */
 /* #set CARDH = dp(pill ? 84 : 64) */
 /* #set GAP = dp(4) */
 /* #set SECW = dp(pill ? 44 : rect ? 44 : 52) */

@@ -1,8 +1,8 @@
 {
   "name": "vela-quicknote-wm3",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
-  "description": "临时记事 — Xiaomi Vela JS 快应用（Wear Material 3 风格）",
+  "description": "QuickNote — Xiaomi Vela JS 快应用（Wear Material 3 风格）",
   "license": "GPL-3.0-or-later",
   "scripts": {
     "build": "bash tools/build.sh",
